@@ -87,10 +87,12 @@ namespace Q1
             return "Name: " + Name + ", Gender: " + Gender + ", Hourly Rate: " + HourlyRate + ", Employee #: " + EmployeeNumber;
 
         }
-        // Method to calculate an employee pay for a 40 hour work week
-        public virtual double CalculatePay()
+        // Method to calculate employee tax (40%)
+        public double CalculateTax()
         {
-            return 40 * HourlyRate; // call HourlyRate Property and multiply the result by 40  
+            double tax;
+            tax = (.40 * HourlyRate);
+            return tax;
         }
     }
     

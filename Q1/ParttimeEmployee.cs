@@ -37,13 +37,6 @@ namespace Q1
         {
             _hoursWorked = hrs;
         }
-
-        // overrides the calculate pay method in the Employee Base Class
-        public override double CalculatePay()
-        {
-            return HoursWorked * HourlyRate;
-        }
-
         // overrides the Base class level ToString method 
         public override string ToString()
         {

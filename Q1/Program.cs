@@ -33,7 +33,7 @@ namespace Q1
 
             Console.WriteLine(employee.ToString()); // print the employee attributes using the ToString method 
 
-            Console.WriteLine($"Pay = {employee.CalculatePay()}"); // calls the CalculatePay method from the employee class 
+            Console.WriteLine($"Pay = {employee.CalculateTax()}"); // calls the CalculatePay method from the employee class 
 
             // Setter Method in action 
             employee.Name = "Beata";
@@ -42,12 +42,12 @@ namespace Q1
 
             Console.WriteLine(employee.ToString()); // print the employee attributes using the ToString method 
 
-            Console.WriteLine($"Pay = {employee.CalculatePay()}"); // calls the CalculatePay method from the employee class
+            Console.WriteLine($"Pay = {employee.CalculateTax()}"); // calls the Calculate tax method from the employee class
 
             employee = new Employee("Garry", "Male", 20); // creating a new employee object using the paramiterised constructor 
 
             Console.WriteLine(employee.ToString());
-            Console.WriteLine($"Pay = {employee.CalculatePay()}"); // calls the CalculatePay method from the employee class
+            Console.WriteLine($"Pay = {employee.CalculateTax()}"); // calls the Calculate tax method from the employee class
 
             // create an array of employe objects by creating a new Employee object at each index position 
             Employee[] AllEmployees = new Employee[4];
@@ -64,7 +64,7 @@ namespace Q1
             for (int i = 0; i < AllEmployees.Length; i++) // loop through Empllyees array 
             {
                 Console.WriteLine(AllEmployees[i].ToString()); // converts each employee Property into a string 
-                Console.WriteLine("Your pay: " + AllEmployees[i].CalculatePay()); // calculate pay per employee 
+                Console.WriteLine("Your pay: " + AllEmployees[i].CalculateTax()); // calculate pay per employee 
             }
         }
     }
