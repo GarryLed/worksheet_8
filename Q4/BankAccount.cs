@@ -33,33 +33,26 @@ namespace Q4
 {
     internal class BankAccount
     {
+        // static variable available to the entire class 
+        private static int _accountNumberSeed = 1234567890; // number will be incremented for each new object 
+        public static string bic = "BOFIIE2D"; // set the BIC code 
+        
         // attributes 
         private string _name;
         private string _accountType; // only allows 3 types of bank account; Current, Deposit, Savings (all else is invalid) 
+        private int _accountNumber;
         private string _bic; // how do I create a BIC?
         private decimal _balance;
         private string _accountPin; // 4 digit 
 
-        // static variable available to the entire class 
-        private static int _accountNumberSeed = 1234567890; // number will be incremented for each new object 
-        public static string bic = "BOFIIE2D"; // set the BIC code 
-       
-
         // properties 
-        // Account number property 
-        public int AccountNumber
-        {
-            get
-            {
-                return _accountNumberSeed;
-            }
-        }
-
-        // Balance property 
+     
+        // expression-bodied member syntax 
+        public string Name { get; private set; }
+        public int AccountNumber => _accountNumberSeed;
 
         public decimal Balance { get { return _balance; } } // get only  
 
-        // Account type property 
         public string AccountType
         {
             get { return _accountType; }
@@ -67,68 +60,39 @@ namespace Q4
             {
                 if (value == "Current" || value == "Deposit" || value == "Savings")
                 {
-                    _accountType = value; // how to I use this to create a valid account type? 
+                    _accountType = value; 
                 }
                 else
                 {
-                    // prompt user to enter a valid option 
+                    throw new FormatException("Invalid account type"); // I need to handle this error 
                 }
             }
         }
-        // name property 
-        public string Name 
-        { 
-            get 
-            { return _name; 
-            }
-            set // how do I make thi setter private? 
-            {
-                _name = value;
-            }
-        }
-        // BIC property 
-        public string Bic
-        {
-            get
-            {
-                return _bic;
-            }
-            set // how do i make this private? 
-            {
-                _bic = value; 
-            }
-        }
+        public string Bic { get; private set; } // private setter 
 
-        // PIN property 
-        private string AccountPin
-        {
-            get
-            {
-                return _accountPin;
-            }
-            set
-            {
-                _accountPin = value;
-            }
-        }
+        private string AccountPin { get; set; } // private 
+       
 
         // parameterised constructor 
-        public BankAccount(string name, string pin )
+        public BankAccount(string name, string accountType, string pin )
         {
-            _balance = 0; // initial balance is set to 0 
+            _accountNumber =_accountNumberSeed++; // increment this number by one for each new objcet 
             Name = name;
+            AccountType = accountType;
             AccountPin = pin;
             Bic = bic; // set bic to public static variable 
-            _accountNumberSeed++; // increment this number by one for each new objcet 
+            _balance = 0; // initial balance is set to 0 
         }
 
-        // instance methods 
-        // Lodge money method 
-        public decimal LodgeMoney(decimal amount)
-        {
-            // write validation logic here for 0 and negative numbers 
-            _balance += amount;
-            return amount;
+        // Methods
+        public decimal LodgeMoney(decimal amount) // is decimal the corrent return type for this method? 
+        { 
+            if (amount <= 0)
+            {
+                throw new ArgumentException("Amount must be greater than 0"); // I need to handle these exceptinos 
+            }
+             return _balance += amount;
+            
         }
         // withdraw money method 
         public decimal WithdrawMoney(decimal amount) // method needs input validaation 
@@ -142,14 +106,22 @@ namespace Q4
         // chagne pin method 
         public string ChangePin()
         {
+            Console.WriteLine("Enter new pin: ");
+            string newPin = Console.ReadLine();
 
+            return AccountPin = newPin; // not sure if this is corrent return value of this method 
+        }
+        // Validate current pin method 
+        public bool VerifyPin(string pin)
+        {
+            return (AccountPin == pin); // returns true if AccountPin and pin match 
         }
 
 
         // method to print attributes of an object 
         public override string ToString()
         {
-            return "Balance: " + Balance; // prints the balance 
+            return $"Account Number: {_accountNumber}, Name: {Name}, Balance: {Balance}";
         }
     }
 }
