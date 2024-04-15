@@ -50,13 +50,16 @@ namespace Q1
             Console.WriteLine($"Pay = {employee.CalculateTax()}"); // calls the Calculate tax method from the employee class
 
             // create an array of employe objects by creating a new Employee object at each index position 
-            Employee[] AllEmployees = new Employee[4];
+            Employee[] AllEmployees = new Employee[5];
 
+            // add full time employees to array 
             AllEmployees[0] = new Employee("Mary", "Female", "Irish", 30);
             AllEmployees[1] = new Employee("John", "Male", "Polish", 40);
+
             // adding part time employees to array 
-            AllEmployees[2] = new PartTimeEmployee();
-            AllEmployees[3] = new PartTimeEmployee("Dominik", "Male", "Polish", 45, 15); 
+            AllEmployees[2] = new PartTimeEmployee("Dominik", "Male", "Polish", 45, 15);
+            AllEmployees[3] = new PartTimeEmployee("David", "Male", "French", 55, 23);
+            AllEmployees[4] = new PartTimeEmployee("Kayla", "Female", "Spanish", 77, 11);
 
 
             // print details of all employees objects from an array 

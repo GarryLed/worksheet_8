@@ -84,7 +84,7 @@ namespace Q1
         // Method to print the attributes of an object 
         public override string ToString() // to a string method (like the one used in Ruby) 
         {
-            return "Name: " + Name + ", Gender: " + Gender + " Nationality : " + Nationality + ", Hourly Rate: " + HourlyRate + ", Employee #: " + EmployeeNumber ;
+            return "Name: " + Name + ", Gender: " + Gender + ", Nationality : " + Nationality + ", Hourly Rate: " + HourlyRate + ", Employee #: " + EmployeeNumber ;
 
         }
         // Method to calculate pay for full time employee 
