@@ -12,6 +12,7 @@ namespace Q1
         // attributes 
         private string _name; // the name field 
         private string _gender;
+        private string _nationality; 
         private int _employeeNumber;
 
         // static variable 
@@ -21,27 +22,15 @@ namespace Q1
         // Name property 
         public string Name
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value; 
-             }
+            get { return _name; }
+            set { _name = value; }
         }
 
         // Gender property used to get and set the gender attributes of an object 
         public string Gender
         {
-            get
-            {
-                return _gender;
-            }
-            set
-            {
-                _gender = value; 
-            }
+            get { return _gender; }
+            set { _gender = value; }
         }
         // HourlyRate property 
         public double HourlyRate { get; set; } 
@@ -49,16 +38,26 @@ namespace Q1
         // Employee number property 
         public int EmployeeNumber
         {
-            get
-            {
-                return _employeeNumber;
-            }
-            set
-            {
-                _employeeNumber = value;
-            }
+            get { return _employeeNumber; }
+            set { _employeeNumber = value; }
         }
 
+        // Nationality 
+        public string Nationality
+        {
+            get { return _nationality; }
+            set
+            {
+                if (value == "American")
+                {
+                    _nationality = "visa required";
+                }
+                else
+                {
+                _nationality = value;
+                }
+            }
+        }
         // default constructor 
         public Employee() 
         {
@@ -67,10 +66,11 @@ namespace Q1
         }
 
         // parameteriesd constructor  that takes three parameters: name, gender and hourly pay 
-        public Employee(string name, string gender, double pay)
+        public Employee(string name, string gender, string nationality, double pay)
         {
             Name = name;
             Gender = gender;
+            Nationality = nationality; 
             HourlyRate = pay;
             lastEmployeeNumber++; 
             EmployeeNumber = lastEmployeeNumber;
@@ -84,11 +84,16 @@ namespace Q1
         // Method to print the attributes of an object 
         public override string ToString() // to a string method (like the one used in Ruby) 
         {
-            return "Name: " + Name + ", Gender: " + Gender + ", Hourly Rate: " + HourlyRate + ", Employee #: " + EmployeeNumber;
+            return "Name: " + Name + ", Gender: " + Gender + " Nationality : " + Nationality + ", Hourly Rate: " + HourlyRate + ", Employee #: " + EmployeeNumber ;
 
         }
+        // Method to calculate pay for full time employee 
+        public virtual double CalculatePay()
+        {
+            return 40 * HourlyRate;
+        }
         // Method to calculate employee tax (40%)
-        public double CalculateTax()
+        public virtual double CalculateTax()
         {
             double tax;
             tax = (.40 * HourlyRate);

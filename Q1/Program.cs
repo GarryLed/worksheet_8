@@ -44,7 +44,7 @@ namespace Q1
 
             Console.WriteLine($"Pay = {employee.CalculateTax()}"); // calls the Calculate tax method from the employee class
 
-            employee = new Employee("Garry", "Male", 20); // creating a new employee object using the paramiterised constructor 
+            employee = new Employee("Garry","Male", "American", 20); // creating a new employee object using the paramiterised constructor 
 
             Console.WriteLine(employee.ToString());
             Console.WriteLine($"Pay = {employee.CalculateTax()}"); // calls the Calculate tax method from the employee class
@@ -52,11 +52,11 @@ namespace Q1
             // create an array of employe objects by creating a new Employee object at each index position 
             Employee[] AllEmployees = new Employee[4];
 
-            AllEmployees[0] = new Employee("Mary", "Female", 30);
-            AllEmployees[1] = new Employee("John", "Male", 40);
+            AllEmployees[0] = new Employee("Mary", "Female", "Irish", 30);
+            AllEmployees[1] = new Employee("John", "Male", "Polish", 40);
             // adding part time employees to array 
             AllEmployees[2] = new PartTimeEmployee();
-            AllEmployees[3] = new PartTimeEmployee("Dominik", "Male", 45, 15); 
+            AllEmployees[3] = new PartTimeEmployee("Dominik", "Male", "Polish", 45, 15); 
 
 
             // print details of all employees objects from an array 
