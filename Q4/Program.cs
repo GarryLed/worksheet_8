@@ -213,67 +213,89 @@ namespace Q4
         // Perform a Lodgement  or Withdrawl
         private static void PerformBankingOperation(BankAccount account, string operation) // pass in BankAccount account opject and a string 
         {
-            Console.Write("Enter your PIN: "); // ask user for their pin
-            string userPin = Console.ReadLine();
+            bool exit = false;
 
-            // verify pin 
-            if (!account.VerifyPin(userPin)) // if userPin is not equal to existing pin then end the operation  
+            while (exit == false) // loop for verifying pin (will end loop after 3 wrong entries  
             {
-                Console.WriteLine("Invalid PIN");
-                return; 
-            }
+                Console.Write("Enter your PIN: "); // ask user for their pin
+                string userPin = Console.ReadLine();
 
-            // ask user for amount 
-            Console.WriteLine($"Enter amount to {operation}");
-            // validate input from user
-            if (!decimal.TryParse(Console.ReadLine(), out decimal amount))
-            {
-                Console.WriteLine("Invalid entry ");  // create a loop here 
-                return;
-            }
-
-            // try, catch 
-            try
-            {
-                if (operation == "lodge")
+                // verify pin 
+                if (account.VerifyPin(userPin)) // if userPin is not equal to existing pin then end the operation  
                 {
-                    // do something with lodgement
-                    account.LodgeMoney(amount); // call the LodgeMoney method on an instance of the BankAccout class 
-                    // print success message 
-                    Console.WriteLine($"Successfully lodged {amount}");
+                    exit = true;
                 }
-                else if (operation == "withdraw")
-                {
-                    // do something with withdrawl 
-                    account.WithdrawMoney(amount); // call the WithDrawMoney method on an instance of BankAccount class
-                    // print success message 
-                    Console.WriteLine($"Successfully withdrew {amount}");
+                else
+                {   
+                    Console.WriteLine("Invalid PIN! Enter a valid PIN to continue");
                 }
+
             }
-            catch (Exception ex) 
+
+            exit = false; // reassigns exit to false for next loop 
+
+            while (exit == false) 
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                // ask user for amount 
+                Console.WriteLine($"Enter amount to {operation}");
+                // validate input from user
+
+                if (decimal.TryParse(Console.ReadLine(), out decimal amount))
+                {
+                    // try, catch 
+                    try
+                    {
+                        if (operation == "lodge")
+                        {
+                            // do something with lodgement
+                            account.LodgeMoney(amount); // call the LodgeMoney method on an instance of the BankAccout class 
+                                                        // print success message 
+                            Console.WriteLine($"Successfully lodged {amount}");
+                        }
+                        else if (operation == "withdraw")
+                        {
+                            // do something with withdrawl 
+                            account.WithdrawMoney(amount); // call the WithDrawMoney method on an instance of BankAccount class
+                                                           // print success message 
+                            Console.WriteLine($"Successfully withdrew {amount}");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                    }
+                    exit = true; 
+                }
+                else
+                {
+                    Console.WriteLine("Invalid entry, please try again ");  // create a loop here 
+
+                }
             }
 
         }
-        
-
         // Check Balance 
         private static void CheckBalance(BankAccount account) 
         {
-            // ask user of PIN 
-            Console.Write("Enter PIN");
-            string userPin = Console.ReadLine();
+            bool exit = false; 
+            while (exit == false)
+            {
+                // ask user of PIN 
+                Console.Write("Enter PIN ");
+                string userPin = Console.ReadLine();
 
-            // check if pin is correce and return relevant message 
-            if (account.VerifyPin(userPin)) 
-            {
-                // print balance 
-                Console.WriteLine($"Your balance is {account.Balance}");
-            }
-            else 
-            {
-                Console.WriteLine("Invalid PIN");
+                // check if pin is correce and return relevant message 
+                if (account.VerifyPin(userPin)) 
+                {
+                    // print balance 
+                    Console.WriteLine(account.ToString());
+                    exit = true;
+                }
+                else 
+                {
+                    Console.WriteLine("Invalid PIN");
+                }
+            
             }
         }
 
